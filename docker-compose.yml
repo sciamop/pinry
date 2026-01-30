@@ -4,15 +4,12 @@ services:
   pinry:
     build:
       context: .
-      dockerfile: docker/Dockerfile.autobuild
+      dockerfile: Dockerfile.autobuild
     ports:
       - "80:80"
     environment:
       - SECRET_KEY=${SECRET_KEY:-change-me-to-a-real-secret-key}
       - ALLOWED_HOSTS=${ALLOWED_HOSTS:-*}
     volumes:
-      - pinry_data:/data
+      - ${DATA_DIR:-./data}:/data
     restart: unless-stopped
-
-volumes:
-  pinry_data:
